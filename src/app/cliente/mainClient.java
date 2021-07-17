@@ -229,7 +229,7 @@ public class mainClient {
 				case 8:
 
 					try {
-						System.out.println("Ingrese el nuemro de cuenta: ");
+						System.out.println("Ingrese el numero de cuenta: ");
 						String cuenta = sn.nextLine();
 
 						String fromUser2 = "CONSULTAR" + "," + cuenta;
