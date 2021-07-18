@@ -1,10 +1,13 @@
 package app.cliente;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
+import app.persistencia.LeerArchivo;
 
 public class mainClient {
 
@@ -41,7 +44,8 @@ public class mainClient {
 			System.out.println("6.Retirar dinero en una cuenta");
 			System.out.println("7.Trasladar dinero a un bolsillo");
 			System.out.println("8.Consultar saldo");
-			System.out.println("9.salir");
+			System.out.println("9.Cargar datos");
+			System.out.println("10.Salir");
 			// System.out.println("3. Opcion 3");
 			// System.out.println("4. Salir");
 
@@ -245,12 +249,39 @@ public class mainClient {
 
 					} catch (Exception e) {
 						e.printStackTrace();
+						System.out.println(e.getMessage());
+					}
+					break;
+					
+				/*case 9:
+
+					try {
+
+						ArrayList<String> lineas = LeerArchivo.leerArchivo("src\\app\\transacciones");
+
+						for (String linea : lineas) {
+
+							System.out.println(linea);
+							EchoTCPClientProtocol.toNetwork.println(linea);
+
+							System.out.println();
+
+							String fromServer2;
+							fromServer2 = EchoTCPClientProtocol.fromNetwork.readLine();
+							System.out.println("[Client] From server: " + fromServer2);
+							reiniciarConexion();
+
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
 
-					break;
-				case 9:
+					break;*/
+				case 10:
+
 					salir = true;
-					EchoTCPClientProtocol.toNetwork.println("nueve");
+					EchoTCPClientProtocol.toNetwork.println("diez");
 
 					try {
 						ec.cerrarSocket();
@@ -260,10 +291,10 @@ public class mainClient {
 					}
 					break;
 				default:
-					System.out.println("Solo números entre 1 y 9");
+					System.out.println("Solo nï¿½meros entre 1 y 10");
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("Debes insertar un número");
+				System.out.println("Debes insertar un nï¿½mero");
 				sn.next();
 			}
 		}

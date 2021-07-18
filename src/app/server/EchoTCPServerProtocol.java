@@ -362,6 +362,9 @@ public class EchoTCPServerProtocol {
 			double saldo = cuenta.getSaldo() + valor;
 			cuenta.setSaldo(saldo);
 
+			Transaccion transaccion = new Transaccion(cuenta, LocalDate.now(), LocalTime.now(), "DEPOSITAR",
+					cuentasBanco.get(cuenta));
+			transacciones.add(transaccion);
 			cadena = "Transaccion existosa";
 		} else {
 
@@ -392,6 +395,11 @@ public class EchoTCPServerProtocol {
 
 				double nuevoSaldo = saldo - valor;
 				cuenta.setSaldo(nuevoSaldo);
+
+				Transaccion transaccion = new Transaccion(cuenta, LocalDate.now(), LocalTime.now(), "RETIRAR",
+						cuentasBanco.get(cuenta));
+				transacciones.add(transaccion);
+
 				cadena = " Retiro existoso ";
 
 			} else {
@@ -429,6 +437,11 @@ public class EchoTCPServerProtocol {
 					double nuevoSaldo = saldo - valor;
 					cuenta.setSaldo(nuevoSaldo);
 					cuenta.getBolsillo().setSaldo(valor);
+
+					Transaccion transaccion = new Transaccion(cuenta, LocalDate.now(), LocalTime.now(), "TRASLADAR",
+							cuentasBanco.get(cuenta));
+					transacciones.add(transaccion);
+
 					cadena = "Traslado existoso\n Saldo cuenta:" + nuevoSaldo + "Saldo bolsillo:" + valor;
 
 				} else {
@@ -458,9 +471,20 @@ public class EchoTCPServerProtocol {
 
 		if (cuenta != null) {
 			double saldoCuenta = cuenta.getSaldo();
-			double saldoBolsillo = cuenta.getBolsillo().getSaldo();
+			if (cuenta.getBolsillo() != null) {
+				double saldoBolsillo = cuenta.getBolsillo().getSaldo();
+				cadena = "El saldo de la cuenta es de: " + saldoCuenta + "  El saldo del bolsillo es de: S"
+						+ saldoBolsillo;
+			} else {
+				cadena = "El saldo de la cuenta es de: " + saldoCuenta;
+			}
 
-			cadena = "El saldo de la cuenta es de: " + saldoCuenta + "  El saldo del bolsillo es de: S" + saldoBolsillo;
+			Transaccion transaccion = new Transaccion(cuenta, LocalDate.now(), LocalTime.now(), "CONSULTAR",
+					cuentasBanco.get(cuenta));
+			transacciones.add(transaccion);
+
+		} else {
+			cadena = "La cuenta no existe";
 		}
 
 		return cadena;
@@ -479,9 +503,21 @@ public class EchoTCPServerProtocol {
 
 		if (cuenta != null) {
 			double saldoCuenta = cuenta.getSaldo();
-			double saldoBolsillo = cuenta.getBolsillo().getSaldo();
+			Bolsillo b = cuenta.getBolsillo();
+			if (b != null) {
+				double saldoBolsillo = b.getSaldo();
+				Transaccion transaccion = new Transaccion(cuenta, LocalDate.now(), LocalTime.now(), "CONSULTAR",
+						cuentasBanco.get(cuenta));
+				transacciones.add(transaccion);
 
-			cadena = "El saldo de la cuenta es de: " + saldoCuenta + " El saldo del bolsillo es de: " + saldoBolsillo;
+				cadena = "El saldo de la cuenta es de: " + saldoCuenta + " El saldo del bolsillo es de: "
+						+ saldoBolsillo;
+			} else {
+				cadena = "No existe  el bolsillo " + bolsillo;
+			}
+
+		} else {
+			cadena = "No existe la cuenta";
 		}
 
 		return cadena;
@@ -496,6 +532,7 @@ public class EchoTCPServerProtocol {
 		} else {
 
 			cadena = consultarSaldoC(Integer.parseInt(cuenta));
+
 		}
 
 		return cadena;

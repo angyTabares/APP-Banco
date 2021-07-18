@@ -28,7 +28,7 @@ public class mainServer {
 			message = EchoTCPServerProtocol.fromNetwork.readLine();
 			System.out.println("[Server] From client: " + message);
 
-			if (!message.equalsIgnoreCase("nueve")) {
+			if (!message.equalsIgnoreCase("diez")) {
 
 				String[] ArrayDatos = message.split(",");
 
@@ -96,6 +96,9 @@ public class mainServer {
 					String cuentaC = ArrayDatos[1];
 					String respuesta8 = EchoTCPServerProtocol.consultarSaldo(cuentaC);
 					EchoTCPServerProtocol.toNetwork.println(respuesta8);
+					break;
+				
+					
 				}
 
 				System.out.println("Transacciones: " + "\n" + EchoTCPServerProtocol.mostrarTransacciones());
