@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import app.cliente.EchoTCPClientProtocol;
+
 public class LeerArchivo {
 
 	public  static ArrayList<String> leerArchivo(String nombre) {
@@ -24,9 +26,8 @@ public class LeerArchivo {
 
 			while ((linea = buffer.readLine()) != null)
 				
-				lineas.add(linea);
-			
-
+				lineas.add(linea+"-");
+			   
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -28,5 +28,5 @@ public class EchoTCPClientProtocol {
 		fromNetwork= new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	}
 	
-
+     
 }

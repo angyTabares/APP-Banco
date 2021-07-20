@@ -77,7 +77,7 @@ public class EchoTCPServerProtocol {
 			Transaccion transaccion = new Transaccion(cuenta, LocalDate.now(), LocalTime.now(), "ABRIR_CUENTA",
 					cuentasBanco.get(cuenta));
 			transacciones.add(transaccion);
-			mensaje = "La transaccion fue exitosa, su numero de cuenta es: " + i;
+			mensaje = "La transaccion fue exitosa";
 			i = i + 1;
 		} else {
 			mensaje = "Error en la transaccion ,el nombre ya existe en el banco";

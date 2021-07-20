@@ -1,10 +1,15 @@
 package app.server;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import app.cliente.EchoTCPClient;
+import app.cliente.EchoTCPClientProtocol;
 import app.model.Cuenta;
+import app.persistencia.*;
+import app.cliente.*;
 
 public class mainServer {
 
@@ -23,19 +28,20 @@ public class mainServer {
 
 	public static void leerOpcionCliente() {
 		String message = "";
-
+		
 		try {
 			message = EchoTCPServerProtocol.fromNetwork.readLine();
 			System.out.println("[Server] From client: " + message);
 
 			if (!message.equalsIgnoreCase("diez")) {
-
+				
 				String[] ArrayDatos = message.split(",");
-
+			
 				String opcion = ArrayDatos[0];
-
+				System.out.println(opcion);
 				switch (opcion) {
 				case "ABRIR_CUENTA":
+					
 					Cuenta cuenta = new Cuenta(ArrayDatos[1], 0);
 					String respuesta = EchoTCPServerProtocol.abrirCuenta(cuenta);
 					EchoTCPServerProtocol.toNetwork.println(respuesta);
@@ -98,6 +104,18 @@ public class mainServer {
 					EchoTCPServerProtocol.toNetwork.println(respuesta8);
 					break;
 				
+				case "CARGA":
+					
+					try {
+						
+						String nombreArchivo=ArrayDatos[1];
+						ArrayList<String> lineas = LeerArchivo.leerArchivo(nombreArchivo);
+						EchoTCPServerProtocol.toNetwork.println(lineas);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					break;
 					
 				}
 

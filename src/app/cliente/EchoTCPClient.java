@@ -9,7 +9,7 @@ public class EchoTCPClient {
 	public static final int PORT= 3400;
 	public static final String SERVER= "localhost";
 	
-	private Socket clientSideSocket;
+	public static Socket clientSideSocket;
 	
 	public EchoTCPClient()
 	{
@@ -24,9 +24,14 @@ public class EchoTCPClient {
 		clientSideSocket.close();
 	}
 	
-	public void cerrarSocket() throws IOException
+	public  void cerrarSocket() throws IOException
 	{
 		clientSideSocket.close();
 	}
 
+	public static void reiniciarSocket() throws Exception
+	{
+		clientSideSocket = new Socket(SERVER,PORT);
+		EchoTCPClientProtocol.createStreams(clientSideSocket);
+	}
 }

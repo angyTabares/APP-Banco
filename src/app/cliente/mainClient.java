@@ -8,6 +8,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import app.persistencia.LeerArchivo;
+import app.persistencia.*;
 
 public class mainClient {
 
@@ -253,31 +254,67 @@ public class mainClient {
 					}
 					break;
 					
-				/*case 9:
+					
+					case 9:
 
 					try {
-
-						ArrayList<String> lineas = LeerArchivo.leerArchivo("src\\app\\transacciones");
-
-						for (String linea : lineas) {
-
-							System.out.println(linea);
-							EchoTCPClientProtocol.toNetwork.println(linea);
-
-							System.out.println();
-
-							String fromServer2;
-							fromServer2 = EchoTCPClientProtocol.fromNetwork.readLine();
-							System.out.println("[Client] From server: " + fromServer2);
+						    System.out.println("Ingrese el nombre del archivo a enviar: ");
+						    String nombreArchivo = sn.nextLine();
+						    String fromUser2 = "CARGA" + "," + nombreArchivo;
+						    EchoTCPClientProtocol.toNetwork.println(fromUser2);
+						    
+						 
+							String fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
+							System.out.println("[Client] From server: " + fromServer);
+							
+							EchoTCPClient.reiniciarSocket();
+							
+							String lineas=fromServer.replace('[',' ');
+							       lineas=lineas.replace(']',' ');
+							       
+							String[] lista = lineas.split("-");
+							
+							for (int i = 0; i < lista.length; i++) {
+								
+							 
+								String cadena="";
+								String cadena2="";
+								if(i==0)
+								{
+								  cadena+=lista[i].replaceAll("^\\s*","")+"\n";
+								}
+								else
+								{
+						          cadena2=lista[i].replaceFirst(",","");
+								          cadena2= cadena2.replaceAll("^\\s*","");
+								  cadena+=cadena2+"\n";
+								}
+								
+								String fromUser3 = cadena;
+							    EchoTCPClientProtocol.toNetwork.println(fromUser3);
+								
+								String fromServer2 = EchoTCPClientProtocol.fromNetwork.readLine();
+								System.out.println("[Client] From server: " + fromServer2);
+								
+								if(i<lista.length-2)
+								{
+								  
+								  EchoTCPClient.reiniciarSocket();
+								}
+								else
+								{
+									reiniciarConexion();
+								}
+								
+							 }
+							 
 							reiniciarConexion();
-
-						}
-
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					
+					break;
 
-					break;*/
 				case 10:
 
 					salir = true;
@@ -291,10 +328,10 @@ public class mainClient {
 					}
 					break;
 				default:
-					System.out.println("Solo n�meros entre 1 y 10");
+					System.out.println("Solo numeros entre 1 y 10");
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("Debes insertar un n�mero");
+				System.out.println("Debes insertar un numero");
 				sn.next();
 			}
 		}
