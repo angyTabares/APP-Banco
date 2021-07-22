@@ -81,6 +81,7 @@ public class mainClient {
 				case 2:
 
 					try {
+						
 						System.out.println("Ingrese el numero de la cuenta: ");
 						int numCuenta = sn.nextInt();
 						sn.nextLine();
@@ -343,7 +344,7 @@ public class mainClient {
 			try {
 				ec.init();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 

@@ -21,7 +21,7 @@ public class EchoTCPClient {
 	    clientSideSocket = new Socket(SERVER,PORT);
 	     EchoTCPClientProtocol.protocol(clientSideSocket);
 		
-		clientSideSocket.close();
+	    clientSideSocket.close();
 	}
 	
 	public  void cerrarSocket() throws IOException
