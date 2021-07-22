@@ -77,7 +77,7 @@ public class EchoTCPServerProtocol {
 			Transaccion transaccion = new Transaccion(cuenta, LocalDate.now(), LocalTime.now(), "ABRIR_CUENTA",
 					cuentasBanco.get(cuenta));
 			transacciones.add(transaccion);
-			mensaje = "La transaccion fue exitosa";
+			mensaje = "La transaccion fue exitosa, El numero de la cuenta es: " + i;
 			i = i + 1;
 		} else {
 			mensaje = "Error en la transaccion ,el nombre ya existe en el banco";
@@ -148,7 +148,7 @@ public class EchoTCPServerProtocol {
 				if (!cuentaP.hayBolsillo()) {
 					Bolsillo bolsillo = new Bolsillo(0, numeroC + "b");
 					cuentaP.setBolsillo(bolsillo);
-					respuesta = "La transaccion fue exitosa";
+					respuesta = "La transaccion fue exitosa, el numero del bolsillo es: " + numeroC+"b";
 					Transaccion transaccion = new Transaccion(cuentaP, LocalDate.now(), LocalTime.now(),
 							"ABRIR_BOLSILLO", cuentasBanco.get(cuentaP));
 					transacciones.add(transaccion);
