@@ -266,7 +266,7 @@ public class mainClient {
 						    
 						 
 							String fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
-							System.out.println("[Client] From server: " + fromServer);
+							//System.out.println("[Client] From server: " + fromServer);
 							
 							EchoTCPClient.reiniciarSocket();
 							
