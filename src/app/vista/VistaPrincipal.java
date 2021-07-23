@@ -287,8 +287,6 @@ public class VistaPrincipal {
 							String fromUser2 = "TRASLADAR" + "," + numCuentaT + "," + valorT;
 							EchoTCPClientProtocol.toNetwork.println(fromUser2);
 
-							System.out.println();
-
 							String fromServer2;
 							fromServer2 = EchoTCPClientProtocol.fromNetwork.readLine();
 							JOptionPane.showMessageDialog(null, fromServer2);
@@ -315,7 +313,7 @@ public class VistaPrincipal {
 				try {
 
 					String numCuentaCliente = JOptionPane.showInputDialog(null,
-							"Ingrese el numero de la cuenta de ahorros");
+							"Ingrese el numero de cuenta o del bolsillo");
 
 					if (numCuentaCliente != null) {
 						if (!numCuentaCliente.isEmpty()) {

@@ -148,7 +148,7 @@ public class EchoTCPServerProtocol {
 				if (!cuentaP.hayBolsillo()) {
 					Bolsillo bolsillo = new Bolsillo(0, numeroC + "b");
 					cuentaP.setBolsillo(bolsillo);
-					respuesta = "La transaccion fue exitosa, el numero del bolsillo es: " + numeroC+"b";
+					respuesta = "La transaccion fue exitosa, el numero del bolsillo es: " + numeroC + "b";
 					Transaccion transaccion = new Transaccion(cuentaP, LocalDate.now(), LocalTime.now(),
 							"ABRIR_BOLSILLO", cuentasBanco.get(cuentaP));
 					transacciones.add(transaccion);
@@ -365,7 +365,8 @@ public class EchoTCPServerProtocol {
 			Transaccion transaccion = new Transaccion(cuenta, LocalDate.now(), LocalTime.now(), "DEPOSITAR",
 					cuentasBanco.get(cuenta));
 			transacciones.add(transaccion);
-			cadena = "Transaccion existosa";
+
+			cadena += "Transaccion existosa, Su nuevo saldo es de: " + cuenta.getSaldo();
 		} else {
 
 			cadena = "Error en la transaccion, la cuenta no existe";
@@ -400,7 +401,7 @@ public class EchoTCPServerProtocol {
 						cuentasBanco.get(cuenta));
 				transacciones.add(transaccion);
 
-				cadena = " Retiro existoso ";
+				cadena = "Retiro existoso, Su saldo actual es de:  " + cuenta.getSaldo();
 
 			} else {
 				cadena = "No se realizo el retiro, saldo insuficiente ";
@@ -442,7 +443,7 @@ public class EchoTCPServerProtocol {
 							cuentasBanco.get(cuenta));
 					transacciones.add(transaccion);
 
-					cadena = "Traslado existoso\n Saldo cuenta:" + nuevoSaldo + "Saldo bolsillo:" + valor;
+					cadena = "Traslado existoso, Saldo cuenta: " + nuevoSaldo + ", Saldo bolsillo: " + valor;
 
 				} else {
 					cadena = "Salfo insuficiente ";
@@ -473,7 +474,7 @@ public class EchoTCPServerProtocol {
 			double saldoCuenta = cuenta.getSaldo();
 			if (cuenta.getBolsillo() != null) {
 				double saldoBolsillo = cuenta.getBolsillo().getSaldo();
-				cadena = "El saldo de la cuenta es de: " + saldoCuenta + "  El saldo del bolsillo es de: S"
+				cadena = "El saldo de la cuenta es de: " + saldoCuenta + "  El saldo del bolsillo es de: "
 						+ saldoBolsillo;
 			} else {
 				cadena = "El saldo de la cuenta es de: " + saldoCuenta;

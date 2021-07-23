@@ -81,7 +81,7 @@ public class mainClient {
 				case 2:
 
 					try {
-						
+
 						System.out.println("Ingrese el numero de la cuenta: ");
 						int numCuenta = sn.nextInt();
 						sn.nextLine();
@@ -235,7 +235,7 @@ public class mainClient {
 				case 8:
 
 					try {
-						System.out.println("Ingrese el numero de cuenta: ");
+						System.out.println("Ingrese el numero de cuenta o del bolsillo: ");
 						String cuenta = sn.nextLine();
 
 						String fromUser2 = "CONSULTAR" + "," + cuenta;
@@ -254,66 +254,57 @@ public class mainClient {
 						System.out.println(e.getMessage());
 					}
 					break;
-					
-					
-					case 9:
+
+				case 9:
 
 					try {
-						    System.out.println("Ingrese el nombre del archivo a enviar: ");
-						    String nombreArchivo = sn.nextLine();
-						    String fromUser2 = "CARGA" + "," + nombreArchivo;
-						    EchoTCPClientProtocol.toNetwork.println(fromUser2);
-						    
-						 
-							String fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
-							//System.out.println("[Client] From server: " + fromServer);
-							
-							EchoTCPClient.reiniciarSocket();
-							
-							String lineas=fromServer.replace('[',' ');
-							       lineas=lineas.replace(']',' ');
-							       
-							String[] lista = lineas.split("-");
-							
-							for (int i = 0; i < lista.length; i++) {
-								
-							 
-								String cadena="";
-								String cadena2="";
-								if(i==0)
-								{
-								  cadena+=lista[i].replaceAll("^\\s*","")+"\n";
-								}
-								else
-								{
-						          cadena2=lista[i].replaceFirst(",","");
-								          cadena2= cadena2.replaceAll("^\\s*","");
-								  cadena+=cadena2+"\n";
-								}
-								
-								String fromUser3 = cadena;
-							    EchoTCPClientProtocol.toNetwork.println(fromUser3);
-								
-								String fromServer2 = EchoTCPClientProtocol.fromNetwork.readLine();
-								System.out.println("[Client] From server: " + fromServer2);
-								
-								if(i<lista.length-2)
-								{
-								  
-								  EchoTCPClient.reiniciarSocket();
-								}
-								else
-								{
-									reiniciarConexion();
-								}
-								
-							 }
-							 
-							reiniciarConexion();
+						System.out.println("Ingrese el nombre del archivo a enviar: ");
+						String nombreArchivo = sn.nextLine();
+						String fromUser2 = "CARGA" + "," + nombreArchivo;
+						EchoTCPClientProtocol.toNetwork.println(fromUser2);
+
+						String fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
+						// System.out.println("[Client] From server: " + fromServer);
+
+						EchoTCPClient.reiniciarSocket();
+
+						String lineas = fromServer.replace('[', ' ');
+						lineas = lineas.replace(']', ' ');
+
+						String[] lista = lineas.split("-");
+
+						for (int i = 0; i < lista.length; i++) {
+
+							String cadena = "";
+							String cadena2 = "";
+							if (i == 0) {
+								cadena += lista[i].replaceAll("^\\s*", "") + "\n";
+							} else {
+								cadena2 = lista[i].replaceFirst(",", "");
+								cadena2 = cadena2.replaceAll("^\\s*", "");
+								cadena += cadena2 + "\n";
+							}
+
+							String fromUser3 = cadena;
+							EchoTCPClientProtocol.toNetwork.println(fromUser3);
+
+							String fromServer2 = EchoTCPClientProtocol.fromNetwork.readLine();
+							System.out.println("[Client] From server: " + fromServer2);
+
+							if (i < lista.length - 2) {
+
+								EchoTCPClient.reiniciarSocket();
+							} else {
+								reiniciarConexion();
+							}
+
+						}
+
+						reiniciarConexion();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					
+
 					break;
 
 				case 10:
@@ -344,7 +335,7 @@ public class mainClient {
 			try {
 				ec.init();
 			} catch (Exception e1) {
-				
+
 				e1.printStackTrace();
 			}
 

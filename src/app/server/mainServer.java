@@ -28,20 +28,20 @@ public class mainServer {
 
 	public static void leerOpcionCliente() {
 		String message = "";
-		
+
 		try {
 			message = EchoTCPServerProtocol.fromNetwork.readLine();
 			System.out.println("[Server] From client: " + message);
 
 			if (!message.equalsIgnoreCase("diez")) {
-				
+
 				String[] ArrayDatos = message.split(",");
-			
+
 				String opcion = ArrayDatos[0];
 				System.out.println(opcion);
 				switch (opcion) {
 				case "ABRIR_CUENTA":
-					
+
 					Cuenta cuenta = new Cuenta(ArrayDatos[1], 0);
 					String respuesta = EchoTCPServerProtocol.abrirCuenta(cuenta);
 					EchoTCPServerProtocol.toNetwork.println(respuesta);
@@ -79,15 +79,15 @@ public class mainServer {
 				case "DEPOSITAR":
 					int numeroCuenta = Integer.parseInt(ArrayDatos[1]);
 					double valor = Double.parseDouble(ArrayDatos[2]);
-					respuesta = EchoTCPServerProtocol.depositarDinero(numeroCuenta, valor);
-					EchoTCPServerProtocol.toNetwork.println(respuesta);
+					String respuesta5 = EchoTCPServerProtocol.depositarDinero(numeroCuenta, valor);
+					EchoTCPServerProtocol.toNetwork.println(respuesta5);
 					break;
 
 				case "RETIRAR":
 					int numeroCuentaR = Integer.parseInt(ArrayDatos[1]);
 					double valorR = Double.parseDouble(ArrayDatos[2]);
-					respuesta = EchoTCPServerProtocol.retirarDinero(numeroCuentaR, valorR);
-					EchoTCPServerProtocol.toNetwork.println(respuesta);
+					String respuesta6 = EchoTCPServerProtocol.retirarDinero(numeroCuentaR, valorR);
+					EchoTCPServerProtocol.toNetwork.println(respuesta6);
 					break;
 
 				case "TRASLADAR":
@@ -103,20 +103,20 @@ public class mainServer {
 					String respuesta8 = EchoTCPServerProtocol.consultarSaldo(cuentaC);
 					EchoTCPServerProtocol.toNetwork.println(respuesta8);
 					break;
-				
+
 				case "CARGA":
-					
+
 					try {
-						
-						String nombreArchivo=ArrayDatos[1];
+
+						String nombreArchivo = ArrayDatos[1];
 						ArrayList<String> lineas = LeerArchivo.leerArchivo(nombreArchivo);
 						EchoTCPServerProtocol.toNetwork.println(lineas);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					
+
 					break;
-					
+
 				}
 
 				System.out.println("Transacciones: " + "\n" + EchoTCPServerProtocol.mostrarTransacciones());
