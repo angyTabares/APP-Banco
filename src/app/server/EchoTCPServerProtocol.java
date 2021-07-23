@@ -391,7 +391,7 @@ public class EchoTCPServerProtocol {
 		if (cuenta != null) {
 
 			double saldo = cuenta.getSaldo();
-			if (saldo > valor) {
+			if (saldo >= valor) {
 
 				double nuevoSaldo = saldo - valor;
 				cuenta.setSaldo(nuevoSaldo);
